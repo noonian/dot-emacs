@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: module-header
+# key: .el
+# --
+;;; ${1:`(file-name-base (buffer-file-name))`}.el --- $2 -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+    $3
+
+(provide '$1)
+;;; $1.el ends here

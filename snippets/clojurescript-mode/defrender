@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: defrender
+# key: defr
+# --
+(defui ^:once $1
+Object
+  (render [this]
+    (let [{:keys [$2] :as props} (om/props this)]
+      $3)))

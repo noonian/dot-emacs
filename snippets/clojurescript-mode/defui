@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: defui
+# key: defui
+# --
+(defui ^:once $1
+  static om/Ident
+  (ident [this props]
+    [$2 (:id props)])
+  static om/IQuery
+  (query [this]
+    $3)
+  Object
+  (render [this]
+    (let [{:keys [$4] :as props} (om/props this)]
+      $5)))

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: actions
+# key: actions
+# --
+import * as constants from "./constants";
+
+$1

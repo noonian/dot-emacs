@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: arrow-function-implicit-return
+# key: ar
+# --
+($1) => $2

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: clj
+# key: clj
+# --
+#+begin_src clojure :tangle yes
+$0
+#+end_src

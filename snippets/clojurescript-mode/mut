@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mutate
+# key: mut
+# --
+(defmethod $1 $2
+  [{:keys [state ast shared]} _ {:keys [$3]}]
+  (let [$4]
+    {$5}))

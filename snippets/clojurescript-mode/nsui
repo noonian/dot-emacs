@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: UI namespace (elisp code modified from clojure ns snippet)
+# key: nsui
+# --
+(ns `(flet ((try-src-prefix
+             (path src-pfx)
+             (let ((parts (split-string path src-pfx)))
+               (if (= 2 (length parts))
+                   (second parts)
+                 nil))))
+       (let* ((p (buffer-file-name))
+              (p2 (first
+                   (remove-if-not '(lambda (x) x)
+                                  (mapcar
+                                   '(lambda (pfx)
+                                      (try-src-prefix p pfx))
+                                   '("/src/cljs/" "/src/clj/"
+                                     "/src/main/" "/src/client"
+                                     "/src/server/"
+                                     "/src/")))))
+              (p3 (file-name-sans-extension p2))
+              (p4 (mapconcat '(lambda (x) x)
+                             (split-string p3 "/")
+                             ".")))
+         (replace-regexp-in-string "_" "-" p4)))`
+    (:require [om.next :as om :refer-macros [defui]]
+              [sablono.core :as sab :refer-macros [html]]
+              [$1 :as $2]
+              [cljs.pprint :refer [pprint]]))

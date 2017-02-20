@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: reducer
+# key: reducer
+# --
+import * as constants from "./constants";
+
+export const initialState = {
+
+};
+
+export function transitionState(state = initialState, action) {
+  switch(action.type) {
+  default:
+    return state;
+  }
+};

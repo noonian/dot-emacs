@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: constants
+# key: constants
+# --
+export const NAME = "${data:$1}";
+$2

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tramp
+# key: tramp
+# --
+#+TITLE: $0
+
+* First heading
