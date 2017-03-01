@@ -241,12 +241,12 @@
   :config
   ;; (load-theme 'white-sand t)
   ;; (load-theme 'wheatgrass t)
-  ;; (load-theme 'brin t)
+  (load-theme 'brin t)
   ;; (load-theme 'hickey t)
   ;; (load-theme 'fogus t)
   ;; (load-theme 'graham t)
   ;; (load-theme 'granger t)
-  (load-theme 'odersky t)
+  ;; (load-theme 'odersky t)
   ;; (load-theme 'dorsey t)
   ;; (load-theme 'mccarthy t)
   ;; (load-theme 'wilson t)
@@ -363,6 +363,9 @@
   (setq js2-strict-trailing-comma-warning nil)
   (setq js2-global-externs '("expect" "require")))
 
+(use-package lisp-mode
+  :mode "\\.wast\\'")
+
 (use-package paredit
   :config (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1))))
 
@@ -375,9 +378,9 @@
   (projectile-global-mode))
 
 (use-package css-mode
-  :mode (("\\.css\\$"  . css-mode)
-         ("\\.scss\\$" . css-mode)
-         ("\\.less\\$" . css-mode))
+  :mode (("\\.css\\'"  . css-mode)
+         ("\\.scss\\'" . css-mode)
+         ("\\.less\\'" . css-mode))
   :init
   (defvar my/sass-search-dir "../../node_modules")
 
