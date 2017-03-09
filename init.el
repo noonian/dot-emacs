@@ -352,6 +352,10 @@
 
 (use-package js2-mode
   :init
+
+  ;; Indent body of js switch statement
+  (setq js-switch-indent-offset 2)
+
   ;; Enable paredit in js modes
   ;; credit: https://truongtx.me/2014/02/22/emacs-using-paredit-with-non-lisp-mode
   (defun my/paredit-nonlisp ()
