@@ -679,6 +679,9 @@ with eshell set-env."
   :config
   (exec-path-from-shell-initialize))
 
+(use-package yaml-mode
+  :defer 30)
+
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
   (require 'unpublished-settings))
