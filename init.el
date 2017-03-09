@@ -102,6 +102,15 @@
 (require 'pallet)
 (pallet-mode t)
 
+(use-package expand-region
+  :defer 7
+  :config
+  (defun my/collapse-region ()
+    (interactive)
+    (er/expand-region -1))
+  :bind (("C-=" . er/expand-region)
+         ("C--" . my/collapse-region)))
+
 (use-package vlf-setup
   :defer 5)
 
