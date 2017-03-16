@@ -351,6 +351,7 @@
 ;;   (setq ido-use-faces nil))
 
 (use-package js2-mode
+  :mode (("\\.js$"  . web-mode))
   :init
 
   ;; Indent body of js switch statement
@@ -671,6 +672,11 @@ with eshell set-env."
     (let ((comint-buffer-maximum-size 0))
       (comint-truncate-buffer)))
   :bind (("C-c s c" . my/shell-clear)))
+
+(use-package simple-httpd
+  :defer 20
+  :commands (httpd-start httpd-stop httpd-serve-directory)
+  :init (setq httpd-port 7000))
 
 (use-package redux)
 
