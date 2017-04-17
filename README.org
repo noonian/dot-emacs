@@ -2,7 +2,6 @@
 
 My init.el was initially based on the structure of [[https://github.com/magnars/.emacs.d][Magnar Sveen's
 .emacs]]. I have since refactored it to a use-package based config.
-my config resides in this file.
 
 I do not recommend cloning this repo directly. Instead, copy and paste
 use-package declarations or other code snippets into your own init.el

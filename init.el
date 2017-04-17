@@ -36,6 +36,8 @@
 (defvar elisp-dirs
   (list site-lisp-dir
         settings-dir
+        (expand-file-name "site-lisp/timonier" user-emacs-directory)
+        (expand-file-name "site-lisp/graphql-mode" user-emacs-directory)
         ;; presentations-dir
         ))
 
@@ -241,7 +243,7 @@
   :config
   ;; (load-theme 'white-sand t)
   ;; (load-theme 'wheatgrass t)
-  (load-theme 'brin t)
+  ;; (load-theme 'brin t)
   ;; (load-theme 'hickey t)
   ;; (load-theme 'fogus t)
   ;; (load-theme 'graham t)
@@ -264,7 +266,7 @@
   ;; (load-theme 'sanityinc-tomorrow-day t)
   ;; (load-theme 'sanityinc-tomorrow-night t)
   ;; (load-theme 'sanityinc-tomorrow-blue t)
-  ;; (load-theme 'sanityinc-tomorrow-bright t)
+  (load-theme 'sanityinc-tomorrow-bright t)
   ;; (load-theme 'sanityinc-tomorrow-eighties t)
   )
 
@@ -580,6 +582,9 @@ function to the one specified by user."
 
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+  ;; Open directory links in emacs instead of the OS file browser
+  (add-to-list #'org-file-apps '(directory . emacs))
+
   :bind (:map org-mode-map
          ("s-i"   . org-indent-block)))
 
@@ -626,7 +631,13 @@ with eshell set-env."
   (defun my/point-docker-to-minikube ()
     (my/bash-eval (shell-command-to-string "minikube docker-env")))
 
-  (add-hook 'eshell-mode-hook (lambda () (exec-path-from-shell-initialize))))
+  (add-hook 'eshell-mode-hook (lambda () (exec-path-from-shell-initialize)))
+  (add-hook 'shell-mode-hook (lambda () (company-mode -1))))
+
+(use-package shell
+  :config
+  (add-hook 'shell-mode-hook (lambda () (exec-path-from-shell-initialize)))
+  (add-hook 'shell-mode-hook (lambda () (company-mode -1))))
 
 ;;; Snippets
 (use-package yasnippet
@@ -669,6 +680,11 @@ with eshell set-env."
   :commands (exec-path-from-shell-initialize)
   :config
   (exec-path-from-shell-initialize))
+
+(use-package timonier
+  :commands (timonier-k8s)
+  :bind (("C-c K t" . timonier-k8s))
+  :init (setq timonier-k8s-proxy "http://127.0.0.1:8001"))
 
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
