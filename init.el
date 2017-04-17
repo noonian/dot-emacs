@@ -104,6 +104,15 @@
 (require 'pallet)
 (pallet-mode t)
 
+(use-package expand-region
+  :defer 7
+  :config
+  (defun my/collapse-region ()
+    (interactive)
+    (er/expand-region -1))
+  :bind (("C-=" . er/expand-region)
+         ("C--" . my/collapse-region)))
+
 (use-package vlf-setup
   :defer 5)
 
@@ -344,7 +353,12 @@
 ;;   (setq ido-use-faces nil))
 
 (use-package js2-mode
+  :mode (("\\.js$"  . web-mode))
   :init
+
+  ;; Indent body of js switch statement
+  (setq js-switch-indent-offset 2)
+
   ;; Enable paredit in js modes
   ;; credit: https://truongtx.me/2014/02/22/emacs-using-paredit-with-non-lisp-mode
   (defun my/paredit-nonlisp ()
@@ -670,6 +684,11 @@ with eshell set-env."
       (comint-truncate-buffer)))
   :bind (("C-c s c" . my/shell-clear)))
 
+(use-package simple-httpd
+  :defer 20
+  :commands (httpd-start httpd-stop httpd-serve-directory)
+  :init (setq httpd-port 7000))
+
 (use-package redux)
 
 (use-package evil)
@@ -681,10 +700,13 @@ with eshell set-env."
   :config
   (exec-path-from-shell-initialize))
 
-(use-package timonier
-  :commands (timonier-k8s)
-  :bind (("C-c K t" . timonier-k8s))
-  :init (setq timonier-k8s-proxy "http://127.0.0.1:8001"))
+;; (use-package timonier
+;;   :commands (timonier-k8s)
+;;   :bind (("C-c K t" . timonier-k8s))
+;;   :init (setq timonier-k8s-proxy "http://127.0.0.1:8001"))
+
+(use-package yaml-mode
+  :defer 30)
 
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
