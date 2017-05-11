@@ -36,8 +36,8 @@
 (defvar elisp-dirs
   (list site-lisp-dir
         settings-dir
-        (expand-file-name "site-lisp/timonier" user-emacs-directory)
-        (expand-file-name "site-lisp/graphql-mode" user-emacs-directory)
+        ;; (expand-file-name "site-lisp/timonier" user-emacs-directory)
+        ;; (expand-file-name "site-lisp/graphql-mode" user-emacs-directory)
         ;; presentations-dir
         ))
 
@@ -144,7 +144,8 @@
   (add-hook 'after-change-major-mode-hook (lambda () (text-scale-set 1)))
   (column-number-mode 1)
   (blink-cursor-mode 0)
-  (set-frame-font "Inconsolata 18" nil t)
+  ;; (set-frame-font "Inconsolata 18" nil t)
+  (set-frame-font "Input Mono 16" nil t)
 
   (defvar my/large-frame-width 1000) ;pixels
   (defvar my/large-frame-height 400)
@@ -275,8 +276,8 @@
   ;; (load-theme 'sanityinc-tomorrow-day t)
   ;; (load-theme 'sanityinc-tomorrow-night t)
   ;; (load-theme 'sanityinc-tomorrow-blue t)
-  (load-theme 'sanityinc-tomorrow-bright t)
-  ;; (load-theme 'sanityinc-tomorrow-eighties t)
+  ;; (load-theme 'sanityinc-tomorrow-bright t)
+  (load-theme 'sanityinc-tomorrow-eighties t)
   )
 
 (use-package smex)
@@ -536,11 +537,16 @@ function to the one specified by user."
 
 (use-package groovy-mode
   :commands (groovy-mode)
-  :mode ("\\.gradle$" . groovy-mode))
+  :mode ("\\.gradle$" . groovy-mode)
+  :config
+  (add-hook 'groovy-mode-hook
+            (lambda ()
+              (setq c-basic-offset 4))))
 
 (use-package json-mode
   :commands (json-mode)
-  :mode ("\\.json$" . json-mode))
+  :mode (("\\.json$" . json-mode)
+         ("\\.eslintrc$" . json-mode)))
 
 (use-package demo-it)
 
@@ -707,6 +713,18 @@ with eshell set-env."
 
 (use-package yaml-mode
   :defer 30)
+
+;; Live markdown preview
+(use-package flymd
+  :config
+  (defun my-flymd-browser-function (url)
+    (let ((process-environment (browse-url-process-environment)))
+      (apply 'start-process
+             (concat "firefox " url)
+             nil
+             "/usr/bin/open"
+             (list "-a" "firefox" url))))
+  (setq flymd-browser-open-function 'my-flymd-browser-function))
 
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
