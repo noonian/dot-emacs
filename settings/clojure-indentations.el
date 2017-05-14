@@ -106,6 +106,10 @@
 
     ;; React native
     (View . 1)
+    (view . 1)
+    (text . 1)
+    (image . 1)
+    (touchable-highlight . 1)
 
     ;; Component
     (start . 1)
