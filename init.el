@@ -510,7 +510,8 @@ function to the one specified by user."
   :bind (("C-c M-j" . cider-jack-in)
          ;; ("C-c k" . cider-repl-clear-buffer)
          ;; ("C-c c r" . cider-component-reset-system)
-         ("C-c c r" . my/reloaded-reset)))
+         ("C-c c r" . my/reloaded-reset)
+         ("C-c v" . cider-eval-buffer)))
 
 (use-package clojure-mode
   :defer t
