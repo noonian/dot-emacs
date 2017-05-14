@@ -530,7 +530,8 @@ function to the one specified by user."
   (add-hook 'clojure-mode-hook
             (lambda ()
               (paredit-mode 1)
-              (cider-mode 1))))
+              (cider-mode 1)
+              (linum-mode 1))))
 
 (use-package css-mode
   :defer t
