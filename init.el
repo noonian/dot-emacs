@@ -728,6 +728,9 @@ with eshell set-env."
              (list "-a" "firefox" url))))
   (setq flymd-browser-open-function 'my-flymd-browser-function))
 
+(use-package markdown-mode
+  :mode (("\\.md$" . markdown-mode)))
+
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
   (require 'unpublished-settings))
