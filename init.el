@@ -354,7 +354,7 @@
 ;;   (setq ido-use-faces nil))
 
 (use-package js2-mode
-  :mode (("\\.js$"  . web-mode))
+  :mode (("\\.js$"  . js2-mode))
   :init
 
   ;; Indent body of js switch statement
