@@ -545,11 +545,12 @@ function to the one specified by user."
 
 (use-package groovy-mode
   :commands (groovy-mode)
-  :mode ("\\.gradle$" . groovy-mode)
+  :mode (("\\.gradle$" . groovy-mode)
+         ("\\.groovy$" . groovy-mode))
   :config
   (add-hook 'groovy-mode-hook
             (lambda ()
-              (setq c-basic-offset 4))))
+              (setq c-basic-offset 2))))
 
 (use-package json-mode
   :commands (json-mode)
