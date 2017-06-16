@@ -248,6 +248,12 @@
   (show-paren-mode 1)
   (global-paren-face-mode 1))
 
+(use-package solarized-theme
+  :config
+  ;; (load-theme 'solarized-dark t)
+  (load-theme 'solarized-light t)
+  )
+
 (use-package sublime-themes
   ;; :disabled t
   :config
@@ -261,7 +267,7 @@
   ;; (load-theme 'odersky t)
   ;; (load-theme 'dorsey t)
   ;; (load-theme 'mccarthy t)
-  (load-theme 'wilson t)
+  ;; (load-theme 'wilson t)
   ;; (load-theme 'junio t)
   ;; (load-theme 'spolsky t)
   ;; (load-theme 'ritchie t)
