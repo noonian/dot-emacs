@@ -665,8 +665,16 @@ with eshell set-env."
 
 (use-package shell
   :config
+  (defun directory-name-base (dirpath)
+    (file-name-nondirectory (directory-file-name dirpath)))
+
+  (defun my/start-shell ()
+    "Start a shell named after the current buffer."
+    (interactive)
+    (shell (format "*shell*<%s>" (directory-name-base default-directory))))
   (add-hook 'shell-mode-hook (lambda () (exec-path-from-shell-initialize)))
-  (add-hook 'shell-mode-hook (lambda () (company-mode -1))))
+  (add-hook 'shell-mode-hook (lambda () (company-mode -1)))
+  :bind (("C-c s s" . my/start-shell)))
 
 ;;; Snippets
 (use-package yasnippet
