@@ -353,6 +353,9 @@
 ;;   (setq ido-enable-flex-matching t)
 ;;   (setq ido-use-faces nil))
 
+(use-package js-doc
+  :bind (("C-c d f" . js-doc-insert-function-doc)))
+
 (use-package js2-mode
   :mode (("\\.js$"  . js2-mode))
   :init
@@ -371,8 +374,9 @@
 
   :config
   (add-hook 'js-mode-hook (lambda ()
-                            ;; (aggressive-indent-mode 1)
-                            (my/paredit-nonlisp)))
+                            (aggressive-indent-mode 1)
+                            ;; (my/paredit-nonlisp)
+                            ))
 
   (add-hook 'json-mode-hook (lambda () (setq js-indent-level 2)))
   (setq js2-basic-offset 2)
@@ -481,6 +485,12 @@ path separators and append .scss extension."
 
 (use-package ido
   :commands ido-completing-read)
+
+(use-package inf-clojure
+  :commands (inf-clojure-minor-mode inf-clojure)
+  :init
+  (setq inf-clojure-repl-type 'lumo)
+  (setq inf-clojure-program "/Users/jed/.nvm/versions/node/v7.4.0/bin/lumo"))
 
 (use-package cider
   :commands cider-mode
