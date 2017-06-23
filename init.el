@@ -248,6 +248,12 @@
   (show-paren-mode 1)
   (global-paren-face-mode 1))
 
+(use-package solarized-theme
+  :config
+  ;; (load-theme 'solarized-dark t)
+  (load-theme 'solarized-light t)
+  )
+
 (use-package sublime-themes
   ;; :disabled t
   :config
@@ -261,7 +267,7 @@
   ;; (load-theme 'odersky t)
   ;; (load-theme 'dorsey t)
   ;; (load-theme 'mccarthy t)
-  (load-theme 'wilson t)
+  ;; (load-theme 'wilson t)
   ;; (load-theme 'junio t)
   ;; (load-theme 'spolsky t)
   ;; (load-theme 'ritchie t)
@@ -549,11 +555,12 @@ function to the one specified by user."
 
 (use-package groovy-mode
   :commands (groovy-mode)
-  :mode ("\\.gradle$" . groovy-mode)
+  :mode (("\\.gradle$" . groovy-mode)
+         ("\\.groovy$" . groovy-mode))
   :config
   (add-hook 'groovy-mode-hook
             (lambda ()
-              (setq c-basic-offset 4))))
+              (setq c-basic-offset 2))))
 
 (use-package json-mode
   :commands (json-mode)
@@ -668,8 +675,16 @@ with eshell set-env."
 
 (use-package shell
   :config
+  (defun directory-name-base (dirpath)
+    (file-name-nondirectory (directory-file-name dirpath)))
+
+  (defun my/start-shell ()
+    "Start a shell named after the current buffer."
+    (interactive)
+    (shell (format "*shell*<%s>" (directory-name-base default-directory))))
   (add-hook 'shell-mode-hook (lambda () (exec-path-from-shell-initialize)))
-  (add-hook 'shell-mode-hook (lambda () (company-mode -1))))
+  (add-hook 'shell-mode-hook (lambda () (company-mode -1)))
+  :bind (("C-c s s" . my/start-shell)))
 
 ;;; Snippets
 (use-package yasnippet

@@ -84,6 +84,7 @@
 (depends-on "shut-up")
 (depends-on "simple-httpd")
 (depends-on "smex")
+(depends-on "solarized-theme")
 (depends-on "spinner")
 (depends-on "sublime-themes")
 (depends-on "swift-mode")
