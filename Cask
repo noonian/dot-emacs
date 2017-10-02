@@ -89,6 +89,7 @@
 (depends-on "swiper")
 (depends-on "tagedit")
 (depends-on "terraform-mode")
+(depends-on "unicode-fonts")
 (depends-on "use-package")
 (depends-on "vlf")
 (depends-on "web")

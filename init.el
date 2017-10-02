@@ -221,7 +221,9 @@
          ("s-\\" . my/delete-other-window)))
 
 (use-package linum
-  :init (setq linum-format "%d  "))
+  :init (setq linum-format "%d  ")
+  :config
+  (add-hook 'linum-mode-hook (lambda () (setq linum-format "%d  "))))
 
 (use-package files
   :init (setq mode-require-final-newline t)
@@ -251,7 +253,7 @@
 (use-package solarized-theme
   :config
   ;; (load-theme 'solarized-dark t)
-  (load-theme 'solarized-light t)
+  ;; (load-theme 'solarized-light t)
   )
 
 (use-package sublime-themes
@@ -268,7 +270,7 @@
   ;; (load-theme 'dorsey t)
   ;; (load-theme 'mccarthy t)
   ;; (load-theme 'wilson t)
-  ;; (load-theme 'junio t)
+  (load-theme 'junio t)
   ;; (load-theme 'spolsky t)
   ;; (load-theme 'ritchie t)
 
@@ -378,7 +380,8 @@
   :config
   (add-hook 'js-mode-hook (lambda ()
                             ;; (aggressive-indent-mode 1)
-                            (my/paredit-nonlisp)))
+                            ;; (my/paredit-nonlisp)
+                            ))
 
   (add-hook 'json-mode-hook (lambda () (setq js-indent-level 2)))
   (setq js2-basic-offset 2)
@@ -405,6 +408,10 @@
          ("\\.scss\\'" . css-mode)
          ("\\.less\\'" . css-mode))
   :init
+
+  (setq css-basic-offset 2)
+
+  ;; Custom sass navigation code
   (defvar my/sass-search-dir "../../node_modules")
 
   (defun my/sass-underscore-prefix (path)
@@ -573,8 +580,10 @@ function to the one specified by user."
 (use-package inf-clojure
   :defer t
   :config
-  (setq inf-clojure-project-root-files '("project.clj" "build.boot" "src"))
-  (setq inf-clojure-program "planck -c src/main:src/test"))
+  ;; (setq inf-clojure-project-root-files '("project.clj" "build.boot" "src"))
+  ;; (setq inf-clojure-program "planck -c src/main:src/test")
+
+  )
 
 (use-package magit
   :defer t
@@ -745,6 +754,15 @@ with eshell set-env."
 
 (use-package markdown-mode
   :mode (("\\.md$" . markdown-mode)))
+
+(use-package elm-mode
+  :init
+  (setq elm-format-on-save t)
+
+  :config
+  (use-package elm-format
+    :init
+    (setq elm-format-command "elm-format-0.18")))
 
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
