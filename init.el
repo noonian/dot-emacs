@@ -220,6 +220,12 @@
          ("C-]" . my/just-one-space-in-region)
          ("s-\\" . my/delete-other-window)))
 
+(use-package align
+  :config
+  (defadvice align-regexp (around align-regexp-with-spaces activate)
+    (let ((indent-tabs-mode nil))
+      ad-do-it)))
+
 (use-package linum
   :init (setq linum-format "%d  ")
   :config
