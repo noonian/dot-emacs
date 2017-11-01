@@ -28,6 +28,9 @@
     ;;; me
     (keybinding . 1)
 
+    ;;; clojure.data.xml
+    (element . 2)
+
     ;;; Garden
     (at-media . 1)
 
