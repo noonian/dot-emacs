@@ -25,6 +25,16 @@
 (defvar my/clojure-indentations
   '(
 
+    ;;; Arachne
+    (server . 1)
+
+    ;;; antizer
+    (form . 1)
+    (form-item . 1)
+    (row . 1)
+    (col . 1)
+    (decorate-field . 2)
+
     ;;; me
     (keybinding . 1)
 
@@ -68,7 +78,7 @@
     (defui . (1 nil nil (1)))
     (div . 1)
     (nav . 1)
-    (form . 1)
+    ;; (form . 1)
     (table . 1)
     (thead . 1)
     (tbody . 1)
