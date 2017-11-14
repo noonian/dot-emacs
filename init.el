@@ -498,6 +498,10 @@ path separators and append .scss extension."
           ad-do-it)
       ad-do-it)))
 
+(use-package highline
+  :config
+  (set-face-background 'highline-face "#732"))
+
 (use-package dash)
 (use-package dash-functional)
 
