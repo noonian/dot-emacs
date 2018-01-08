@@ -276,7 +276,7 @@
   ;; (load-theme 'dorsey t)
   ;; (load-theme 'mccarthy t)
   ;; (load-theme 'wilson t)
-  (load-theme 'junio t)
+  ;; (load-theme 'junio t)
   ;; (load-theme 'spolsky t)
   ;; (load-theme 'ritchie t)
 
@@ -292,6 +292,12 @@
   ;; (load-theme 'sanityinc-tomorrow-blue t)
   ;; (load-theme 'sanityinc-tomorrow-bright t)
   ;; (load-theme 'sanityinc-tomorrow-eighties t)
+  )
+
+(use-package leuven-theme
+  :config
+  (load-theme 'leuven)
+  ;; (load-theme 'leuven-dark)
   )
 
 (use-package smex)

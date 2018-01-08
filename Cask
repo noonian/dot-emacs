@@ -54,6 +54,7 @@
 (depends-on "kv")
 (depends-on "less-css-mode")
 (depends-on "let-alist")
+(depends-on "leuven-theme")
 (depends-on "lorem-ipsum")
 (depends-on "magit")
 (depends-on "magit-popup")
