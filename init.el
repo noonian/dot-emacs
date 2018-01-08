@@ -789,6 +789,11 @@ with eshell set-env."
     :init
     (setq elm-format-command "elm-format-0.18")))
 
+(use-package kotlin-mode
+  :defer 200
+  :init
+  (setq kotlin-tab-width 4))
+
 ;; Project and work-specific config that I don't want to check into git
 (when (locate-library "unpublished-settings")
   (require 'unpublished-settings))

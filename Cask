@@ -51,6 +51,7 @@
 (depends-on "js-doc")
 (depends-on "js2-mode")
 (depends-on "json-mode")
+(depends-on "kotlin-mode")
 (depends-on "kv")
 (depends-on "less-css-mode")
 (depends-on "let-alist")
