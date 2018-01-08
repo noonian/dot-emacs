@@ -27,6 +27,11 @@
 
     ;;; Arachne
     (server . 1)
+    (id . 1)
+    (map-transform . 2)
+    (type . 2)
+    (attr . 4)
+    (endpoint . 2)
 
     ;;; antizer
     (form . 1)
@@ -34,6 +39,10 @@
     (row . 1)
     (col . 1)
     (decorate-field . 2)
+
+    ;;; boot
+
+    ;; (set-env! . 1)
 
     ;;; me
     (keybinding . 1)
