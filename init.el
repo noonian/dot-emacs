@@ -85,7 +85,12 @@
       ring-bell-function 'ignore)
 
 ;; Setup Cask
-(defvar my/path-to-cask "/usr/local/share/emacs/site-lisp/cask")
+(defvar my/path-to-cask
+  (if (eq system-type 'darwin)
+      ;; homebrew location
+      "/usr/local/share/emacs/site-lisp/cask"
+    ;; Arch linux AUR default location
+    "/usr/share/cask"))
 (require 'cask (concat my/path-to-cask "/cask.el"))
 (cask-initialize)
 
@@ -305,8 +310,8 @@
 (use-package ivy
   :demand t
   :commands (ivy-mode)
-  :bind (:map ivy-minibuffer-map
-              ("C-x C-f" . my/ivy-dont-complete-me))
+  ;; :bind (:map ivy-minibuffer-map
+  ;;             ("C-x C-f" . my/ivy-dont-complete-me))
   :config
 
   (defun my/ivy-dont-complete-me () (substring "foo" 1)
@@ -324,7 +329,8 @@
   :bind (("C-s" . swiper)))
 
 (use-package counsel
-  :bind (("C-x C-f" . counsel-find-file)
+  :bind (
+         ;; ("C-x C-f" . counsel-find-file)
          ("C-c c f" . counsel-git)
          ("M-x"     . counsel-M-x)
          ("C-h f"   . counsel-describe-function)
@@ -648,6 +654,13 @@ function to the one specified by user."
   ;; Open directory links in emacs instead of the OS file browser
   (add-to-list #'org-file-apps '(directory . emacs))
 
+  ;; Enable babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (shell . t)
+     ))
+
   :bind (:map org-mode-map
          ("s-i"   . org-indent-block)))
 
@@ -683,16 +696,16 @@ with eshell set-env."
            (exports (-map export-to-list (-filter exportp lines))))
       exports))
 
-  (defun my/bash-eval (bash-str)
-    "Parse simple bash expression and interpret export statements
-with eshell set-env."
-    (interactive)
-    (dolist (export (my/bash-exports bash-str))
-      (apply 'exec-path-from-shell-setenv export)
-      (apply 'setenv export)))
+;;   (defun my/bash-eval (bash-str)
+;;     "Parse simple bash expression and interpret export statements
+;; with eshell set-env."
+;;     (interactive)
+;;     (dolist (export (my/bash-exports bash-str))
+;;       (apply 'exec-path-from-shell-setenv export)
+;;       (apply 'setenv export)))
 
-  (defun my/point-docker-to-minikube ()
-    (my/bash-eval (shell-command-to-string "minikube docker-env")))
+  ;; (defun my/point-docker-to-minikube ()
+  ;;   (my/bash-eval (shell-command-to-string "minikube docker-env")))
 
   (add-hook 'eshell-mode-hook (lambda () (exec-path-from-shell-initialize)))
   (add-hook 'shell-mode-hook (lambda () (company-mode -1))))
@@ -707,7 +720,7 @@ with eshell set-env."
     (interactive)
     (shell (format "*shell*<%s>" (directory-name-base default-directory))))
   (add-hook 'shell-mode-hook (lambda () (exec-path-from-shell-initialize)))
-  (add-hook 'shell-mode-hook (lambda () (company-mode -1)))
+  ;; (add-hook 'shell-mode-hook (lambda () (company-mode -1)))
   :bind (("C-c s s" . my/start-shell)))
 
 ;;; Snippets
@@ -726,11 +739,12 @@ with eshell set-env."
   (setq tramp-default-method "ssh")
 
   ;; Tell
-  (defun my/tramp-file-advice (orig &rest args)
-    (let ((temporary-file-directory "/tmp"))
-      (apply orig args)))
+  ;; (defun my/tramp-file-advice (orig &rest args)
+  ;;   (let ((temporary-file-directory "/tmp"))
+  ;;     (apply orig args)))
 
-  (advice-add 'org-babel-temp-file :around #'my/tramp-file-advice))
+  ;; (advice-add 'org-babel-temp-file :around #'my/tramp-file-advice)
+  )
 
 (use-package shell
   :init
@@ -801,4 +815,8 @@ with eshell set-env."
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
+
+;;; Daeomon mode
+(server-start)
+
 ;;; init.el ends here
