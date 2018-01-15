@@ -149,8 +149,18 @@
   (add-hook 'after-change-major-mode-hook (lambda () (text-scale-set 1)))
   (column-number-mode 1)
   (blink-cursor-mode 0)
-  ;; (set-frame-font "Inconsolata 18" nil t)
-  (set-frame-font "Input Mono 16" nil t)
+
+  ;;; Font
+  (defun my/font-installed? (font-name)
+    (find-font (font-spec :name font-name)))
+
+  (let ((input-mono "Input Mono 16")
+        (inconsolata "Inconsolata 18")
+        (menlo "Menlo"))
+    (cond
+     ((my/font-installed? input-mono) (set-frame-font input-mono nil t))
+     ((my/font-installed? inconsolata) (set-frame-font inconsolata nil t))
+     (t menlo)))
 
   (defvar my/large-frame-width 1000) ;pixels
   (defvar my/large-frame-height 400)
