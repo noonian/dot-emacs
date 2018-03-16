@@ -25,6 +25,9 @@
 (defvar my/clojure-indentations
   '(
 
+    ;;; Compojure
+    (context . 2)
+
     ;;; Arachne
     (server . 1)
     (id . 1)
