@@ -52,7 +52,7 @@
 ;; Add melpa to package repos
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 ;; Keep emacs Custom-settings in separate file and load it on init
 (setq custom-file (expand-file-name "custom-file.el" user-emacs-directory))
@@ -284,7 +284,7 @@
   ;; (load-theme 'wheatgrass t)
   ;; (load-theme 'brin t)
   ;; (load-theme 'hickey t)
-  ;; (load-theme 'fogus t)
+  (load-theme 'fogus t)
   ;; (load-theme 'graham t)
   ;; (load-theme 'granger t)
   ;; (load-theme 'odersky t)
@@ -309,16 +309,34 @@
   ;; (load-theme 'sanityinc-tomorrow-eighties t)
   )
 
-(use-package leuven-theme
+(use-package powerline
   :config
-  (load-theme 'leuven)
-  ;; (load-theme 'leuven-dark)
+  (powerline-default-theme)
+  ;; (powerline-center-theme)
+  ;; (powerline-center-evil-theme)
+  ;; (powerline-vim-theme)
+  ;; (powerline-nano-theme)
+  ;; (powerline-revert)
   )
+
+;; (use-package leuven-theme
+;;   :config
+
+;;   ;; (load-theme 'leuven)
+;;   ;; (load-theme 'leuven-dark)
+;;   )
+
+
+;; Diminish modes loaded by default
+(diminish 'text-scale-mode)
+(diminish 'eldoc-mode)
+(diminish 'auto-revert-mode)
 
 (use-package smex)
 
 (use-package ivy
   :demand t
+  :diminish ivy-mode
   :commands (ivy-mode)
   ;; :bind (:map ivy-minibuffer-map
   ;;             ("C-x C-f" . my/ivy-dont-complete-me))
@@ -350,9 +368,13 @@
   :defer 5
   :commands aggressive-indent-mode)
 
+(use-package undo-tree
+  :diminish undo-tree-mode)
+
 (use-package company
-  :commands (global-company-mode)
   :defer 5
+  :diminish company-mode
+  :commands (global-company-mode)
   :bind (:map company-active-map
               ("M-n" . nil)
               ("M-p" . nil)
@@ -424,9 +446,11 @@
   :mode "\\.wast\\'")
 
 (use-package paredit
+  :diminish paredit-mode
   :config (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1))))
 
 (use-package projectile
+  :diminish projectile-mode
   :init (setq projectile-completion-system 'ivy)
   :bind (("C-c p f" . projectile-find-file)
          ("C-c p l" . projectile-find-file-in-directory)
@@ -537,6 +561,7 @@ path separators and append .scss extension."
   (setq inf-clojure-program "/Users/jed/.nvm/versions/node/v7.4.0/bin/lumo"))
 
 (use-package cider
+  :diminish cider-mode
   :commands cider-mode
   :init
   (defvar cider-component-reset-fn nil)
@@ -565,10 +590,12 @@ function to the one specified by user."
          ;; ("C-c k" . cider-repl-clear-buffer)
          ;; ("C-c c r" . cider-component-reset-system)
          ("C-c c r" . my/reloaded-reset)
-         ("C-c v" . cider-eval-buffer)))
+         ("C-c v" . cider-eval-buffer)
+         ("s-t" . cider-test-run-ns-tests)))
 
 (use-package clojure-mode
   :defer t
+  :bind (("C-c ;" . comment-indent))
   :mode (("\\.clj$" . clojure-mode)
          ("\\.cljs$" . clojurescript-mode)
          ("\\.cljc$" . clojure-mode)
@@ -671,8 +698,14 @@ function to the one specified by user."
      (shell . t)
      ))
 
+   ;; Improve cycling behavior
+
+   (defun my/org-cycle-better ()
+     (interactive)
+     (org-end-of-subtree))
+
   :bind (:map org-mode-map
-         ("s-i"   . org-indent-block)))
+         ("s-i" . org-indent-block)))
 
 (use-package s)
 
@@ -736,6 +769,7 @@ with eshell set-env."
 ;;; Snippets
 (use-package yasnippet
   :defer 5
+  :diminish yas-minor-mode
   :commands (yas-global-mode yas-expand)
   :config
   (yas-global-mode 1)

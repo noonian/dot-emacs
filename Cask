@@ -19,6 +19,7 @@
 (depends-on "db")
 (depends-on "demo-it")
 (depends-on "diminish")
+(depends-on "edit-server-htmlize")
 (depends-on "elnode")
 (depends-on "emmet-mode")
 (depends-on "epl")
